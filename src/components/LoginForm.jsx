@@ -1,9 +1,42 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation, gql } from "@apollo/client";
 
 import Input from "./UI/Input";
 import Card from "./UI/Card";
 import ButtonPrimary from "./UI/ButtonPrimary";
+
+const SIGNUP_USER = gql`
+  mutation Signup(
+    $name: String!
+    $username: String!
+    $email: String!
+    $password: String!
+  ) {
+    signup(
+      name: $name
+      username: $username
+      email: $email
+      password: $password
+    ) {
+      token
+      user {
+        username
+      }
+    }
+  }
+`;
+
+const LOGIN_USER = gql`
+  mutation Login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      token
+      user {
+        username
+      }
+    }
+  }
+`;
 
 const LoginForm = ({ isLogin }) => {
   const usernameRef = useRef();
@@ -11,10 +44,41 @@ const LoginForm = ({ isLogin }) => {
   const emailRef = useRef();
   const nameRef = useRef();
 
+  const navigate = useNavigate();
+
+  const [login, { loading }] = useMutation(isLogin ? LOGIN_USER : SIGNUP_USER, {
+    onCompleted({ login, signup }) {
+      if (login || signup) {
+        localStorage.setItem("token", login ? login.token : signup.token);
+        localStorage.setItem(
+          "me",
+          login ? login.user.username : signup.user.username
+        );
+        navigate("/", { replace: true });
+      }
+    },
+    onError(err) {
+      console.error(err.message);
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    login({
+      variables: {
+        username: usernameRef.current?.value,
+        password: passwordRef.current?.value,
+        email: emailRef.current?.value,
+        name: usernameRef.current?.value,
+      },
+    });
+  };
+
   return (
     <Card className="w-[22rem] py-5">
       <form
-        onSubmit={() => console.log("login")}
+        onSubmit={handleSubmit}
         className="flex flex-col items-center space-y-3"
       >
         <img
@@ -76,7 +140,7 @@ const LoginForm = ({ isLogin }) => {
           ref={passwordRef}
         />
 
-        <ButtonPrimary type="submit" className="w-64 py-2">
+        <ButtonPrimary type="submit" className="w-64 py-2" disabled={loading}>
           {isLogin ? "Log In" : "Signup"}
         </ButtonPrimary>
 
