@@ -18,6 +18,7 @@ import Container from "./Container";
 const GET_USER = gql`
   query GetUser($username: String!) {
     user(username: $username) {
+      id
       avatar
     }
   }

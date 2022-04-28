@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
   return (
     <>
       {location.pathname !== "/login" && <Header />}
-      <main className="bg-gray-50">
+      <main className="bg-gray-50 h-screen">
         <Container>{children}</Container>
       </main>
     </>
