@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 
 import Bio from "../components/profile/Bio";
-import Posts from "../components/profile/Posts";
+import Gallery from "../components/profile/Gallery";
 
 const GET_USER = gql`
   query GetUser($username: String!) {
@@ -24,6 +24,7 @@ const GET_USER = gql`
         url
         likeCount
         commentCount
+        alreadyLiked
       }
     }
   }
@@ -55,7 +56,7 @@ const Profile = () => {
       {data && (
         <>
           <Bio user={data.user} />
-          <Posts posts={data.user.posts} />
+          <Gallery user={data.user} />
         </>
       )}
     </>

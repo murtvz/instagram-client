@@ -33,7 +33,7 @@ const Header = () => {
   const { data } = useQuery(GET_USER, { variables: { username: me } });
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-white shadow-sm">
+    <header className="sticky top-0 z-10 border-b bg-white shadow-sm">
       <Container className="flex items-center h-16 justify-between px-5">
         {/* Logo */}
         <Link to="/">
