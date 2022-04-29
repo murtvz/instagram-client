@@ -35,6 +35,7 @@ const Profile = () => {
   const { loading, error, data } = useQuery(GET_USER, {
     variables: { username: params.username },
   });
+
   return (
     <>
       {loading && <p>Loading...</p>}
