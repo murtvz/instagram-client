@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import ButtonPrimary from "../UI/ButtonPrimary";
 import ButtonSecondary from "../UI/ButtonSecondary";
 import { UserIcon } from "@heroicons/react/solid";
+import { logout } from "../../utils";
 
 const BioButtons = ({ user }) => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const BioButtons = ({ user }) => {
   };
 
   // Handle following and unfollowing user
-  const handleFollow = async () => {
+  const handleFollow = () => {
     if (!token) return navigate("/login");
   };
 
@@ -57,7 +58,12 @@ const BioButtons = ({ user }) => {
       {/* The logged in users profile*/}
       {token && me === user.username && (
         <ButtonSecondary
-          onClick={() => console.log("logout")}
+          onClick={() => {
+            logout();
+            navigate("/login", {
+              replace: true,
+            });
+          }}
           className="px-24 md:relative md:top-1 md:h-8 md:px-5"
         >
           Sign Out
