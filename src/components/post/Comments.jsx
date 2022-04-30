@@ -4,6 +4,8 @@ import { HeartIcon } from "@heroicons/react/outline";
 import Comment from "./Caption";
 
 const Comments = ({ comments, setOpen }) => {
+  const token = localStorage.getItem("token");
+
   return (
     <section className="max-h-24 overflow-y-scroll">
       {comments.map((comment) => (
@@ -16,7 +18,7 @@ const Comments = ({ comments, setOpen }) => {
             />
           </div>
           <button className="pr-2">
-            <HeartIcon className="w-4 h-4" />
+            {token && <HeartIcon className="w-4 h-4" />}
           </button>
         </div>
       ))}

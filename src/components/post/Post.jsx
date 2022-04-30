@@ -7,6 +7,8 @@ import PostButtons from "./PostButtons";
 import PostHeader from "./PostHeader";
 
 const Post = ({ data, setOpen }) => {
+  const token = localStorage.getItem("token");
+
   return (
     <>
       <PostHeader
@@ -24,7 +26,7 @@ const Post = ({ data, setOpen }) => {
       />
 
       <div className="p-3">
-        <PostButtons alreadyLiked={data.alreadyLiked} />
+        {token && <PostButtons alreadyLiked={data.alreadyLiked} />}
         {/* Like count */}
         <div className="text-sm font-semibold cursor-pointer mb-2">
           {data.likeCount} likes
@@ -35,8 +37,12 @@ const Post = ({ data, setOpen }) => {
           body={data.caption}
         />
         <Comments comments={data.comments} setOpen={setOpen} />
-        <hr className="opacity-60 my-3" />
-        <AddComment />
+        {token && (
+          <>
+            <hr className="opacity-60 my-3" />
+            <AddComment />
+          </>
+        )}
       </div>
     </>
   );

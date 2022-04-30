@@ -73,7 +73,7 @@ const Header = () => {
               className="navBtn"
               onClick={() => console.log("logout")}
             />
-            <Link to="profile">
+            <Link to={`/${me}`}>
               <Avatar src={data?.user?.avatar} size="w-8 h-8" />
             </Link>
           </nav>

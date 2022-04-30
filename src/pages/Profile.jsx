@@ -31,10 +31,10 @@ const GET_USER = gql`
 `;
 
 const Profile = () => {
-  const params = useParams();
+  const { username } = useParams();
 
   const { loading, error, data } = useQuery(GET_USER, {
-    variables: { username: params.username },
+    variables: { username },
   });
 
   return (
