@@ -7,6 +7,10 @@
     @apply h-6 cursor-pointer;
   }
 
+  .feedBtn {
+    @apply w-7 h-7 cursor-pointer text-gray-800 hover:text-gray-400;
+  }
+
   .btn {
     @apply h-7 cursor-pointer transition-all duration-150 ease-out hover:scale-125;
   }

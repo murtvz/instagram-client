@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import Post from "./GalleryItem";
-import GalleryModal from "./GalleryModal";
+import PostModal from "./PostModal";
 
 const Gallery = ({ user }) => {
-  const [showPost, setShowPost] = useState(false);
+  const [open, setOpen] = useState(false);
   const [post, setPost] = useState();
 
   return (
     <>
       {/* Post Modal */}
-      {showPost && (
-        <GalleryModal
-          showPost={showPost}
+      {open && (
+        <PostModal
+          open={open}
           post={post}
-          setShowPost={setShowPost}
+          setOpen={setOpen}
           user={{
             avatar: user.avatar,
             username: user.username,
@@ -32,7 +32,7 @@ const Gallery = ({ user }) => {
             comments={post.commentCount}
             key={post.id}
             onClick={() => {
-              setShowPost(true);
+              setOpen(true);
               setPost(post);
             }}
           />
