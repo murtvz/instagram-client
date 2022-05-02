@@ -1,12 +1,29 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { gql, useMutation } from "@apollo/client";
 
 import ButtonPrimary from "../UI/ButtonPrimary";
 import ButtonSecondary from "../UI/ButtonSecondary";
 import { UserIcon } from "@heroicons/react/solid";
 import { logout } from "../../utils";
 
+const FOLLOW_USER = gql`
+  mutation FollowUser($id: ID!) {
+    follow(id: $id) {
+      id
+      alreadyFollowing
+      followerCount
+    }
+  }
+`;
+
 const BioButtons = ({ user }) => {
+  const [follow] = useMutation(FOLLOW_USER, {
+    variables: {
+      id: user.id,
+    },
+  });
+
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
@@ -20,6 +37,7 @@ const BioButtons = ({ user }) => {
   // Handle following and unfollowing user
   const handleFollow = () => {
     if (!token) return navigate("/login");
+    follow();
   };
 
   return (

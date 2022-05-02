@@ -11,7 +11,9 @@ const Followers = ({ desktop, mobile, user }) => {
           </div>
           <button className="cursor-pointer space-x-2">
             <span className="font-medium ">{user.followerCount}</span>
-            <span className=" text-gray-600">followers</span>
+            <span className=" text-gray-600">
+              {user.followerCount === 1 ? "follower" : "followers"}
+            </span>
           </button>
           <button className="cursor-pointer space-x-2">
             <span className="font-medium ">{user.followingCount}</span>
@@ -30,7 +32,9 @@ const Followers = ({ desktop, mobile, user }) => {
             </div>
             <button className="flex cursor-pointer flex-col items-center">
               <span className="text-sm font-medium">{user.followerCount}</span>
-              <span className="text-sm text-gray-400">followers</span>
+              <span className="text-sm text-gray-400">
+                {user.followerCount === 1 ? "follower" : "followers"}
+              </span>
             </button>
             <button className="flex cursor-pointer flex-col items-center">
               <span className="text-sm font-medium">{user.followingCount}</span>
