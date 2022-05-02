@@ -71,6 +71,7 @@ const AddComment = ({ id }) => {
       <div className="w-full">
         <input
           type="text"
+          required
           className="w-full border-0 focus:ring-0 placeholder:text-sm"
           placeholder="Add a comment"
           ref={commentRef}
