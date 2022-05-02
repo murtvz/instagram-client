@@ -26,10 +26,10 @@ const Post = ({ data, setOpen }) => {
       />
 
       <div className="p-3">
-        {token && <PostButtons alreadyLiked={data.alreadyLiked} />}
+        {token && <PostButtons id={data.id} alreadyLiked={data.alreadyLiked} />}
         {/* Like count */}
         <div className="text-sm font-semibold cursor-pointer mb-2">
-          {data.likeCount} likes
+          {data.likeCount} {data.likeCount === 1 ? "like" : "likes"}
         </div>
         <Caption
           username={data.username}

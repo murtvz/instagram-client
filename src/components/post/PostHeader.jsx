@@ -6,6 +6,7 @@ import Avatar from "../UI/Avatar";
 
 const PostHeader = ({ avatar, username, setOpen, alreadyFollowing }) => {
   const token = localStorage.getItem("token");
+  const me = localStorage.getItem("me");
   const navigate = useNavigate();
 
   // Handle (un)following user
@@ -24,12 +25,14 @@ const PostHeader = ({ avatar, username, setOpen, alreadyFollowing }) => {
         >
           {username}
         </Link>
-        <button
-          onClick={handleFollow}
-          className="text-sm font-medium text-blue-500 focus:outline-none"
-        >
-          {alreadyFollowing ? "Unfollow" : "Follow"}
-        </button>
+        {me !== username && (
+          <button
+            onClick={handleFollow}
+            className="text-sm font-medium text-blue-500 focus:outline-none"
+          >
+            {alreadyFollowing ? "Unfollow" : "Follow"}
+          </button>
+        )}
       </div>
 
       {token && (

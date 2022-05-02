@@ -9,6 +9,8 @@ const GET_POST = gql`
     post(id: $postId) {
       id
       caption
+      alreadyLiked
+      likeCount
       comments {
         id
         body
