@@ -63,16 +63,16 @@ const Header = () => {
         {/* Show Icons when a user is logged in */}
         {token && (
           <nav className={`ml-5 flex items-center space-x-4`}>
-            <Link to="/" className="navBtn">
-              <HomeIcon />
+            <Link to="/">
+              <HomeIcon className="navBtn" />
             </Link>
-            <PaperAirplaneIcon className="navBtn " />
+            {/* <PaperAirplaneIcon className="navBtn " /> */}
             <PlusCircleIcon className="navBtn" />
-            <UserGroupIcon className="navBtn" />
-            <HeartIcon
+            {/* <UserGroupIcon className="navBtn" /> */}
+            {/* <HeartIcon
               className="navBtn"
               onClick={() => console.log("logout")}
-            />
+            /> */}
             <Link to={`/${me}`}>
               <Avatar src={data?.user?.avatar} size="w-8 h-8" />
             </Link>
