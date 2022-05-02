@@ -4,7 +4,7 @@ import { gql, useQuery } from "@apollo/client";
 import Post from "../post/Post";
 import Modal from "../UI/Modal";
 
-const GET_POST = gql`
+export const GET_POST = gql`
   query GetPost($postId: ID!) {
     post(id: $postId) {
       id
@@ -18,7 +18,6 @@ const GET_POST = gql`
         commentedBy {
           id
           username
-          avatar
         }
       }
     }

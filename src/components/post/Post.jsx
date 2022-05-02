@@ -60,7 +60,7 @@ const Post = ({ data, setOpen }) => {
         {token && (
           <>
             <hr className="opacity-60 my-3" />
-            <AddComment />
+            <AddComment id={data.id} />
           </>
         )}
       </div>

@@ -5,9 +5,9 @@ import { gql, useQuery } from "@apollo/client";
 import {
   SearchIcon,
   PlusCircleIcon,
-  UserGroupIcon,
-  HeartIcon,
-  PaperAirplaneIcon,
+  // UserGroupIcon,
+  // HeartIcon,
+  // PaperAirplaneIcon,
 } from "@heroicons/react/outline";
 import { HomeIcon } from "@heroicons/react/solid";
 
