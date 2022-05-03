@@ -26,7 +26,7 @@ const MiniProfile = ({ className }) => {
   return (
     <>
       {data && (
-        <div className="flex items-center fixed top-20 mt-14 ml-10 w-72">
+        <div className="flex items-center fixed top-20 ml-6 mt-10 w-72">
           <Link to={`/${me}`}>
             <Avatar src={data.user.avatar} size="h-14 w-14" />
           </Link>

@@ -5,7 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 import Bio from "../components/profile/Bio";
 import Gallery from "../components/profile/Gallery";
 
-const GET_USER = gql`
+export const GET_USER = gql`
   query GetUser($username: String!) {
     user(username: $username) {
       id

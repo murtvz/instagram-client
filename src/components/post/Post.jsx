@@ -53,11 +53,13 @@ const Post = ({ data, setOpen, className }) => {
         <div className="text-sm font-semibold cursor-pointer mb-2">
           {data.likeCount} {data.likeCount === 1 ? "like" : "likes"}
         </div>
-        <Caption
-          username={data.postedBy.username}
-          setOpen={setOpen}
-          body={data.caption}
-        />
+        {data.caption && (
+          <Caption
+            username={data.postedBy.username}
+            setOpen={setOpen}
+            body={data.caption}
+          />
+        )}
         <Comments comments={data.comments} setOpen={setOpen} />
         {token && (
           <>
