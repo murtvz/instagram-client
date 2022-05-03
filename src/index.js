@@ -13,7 +13,7 @@ import "./index.css";
 import App from "./App";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000/",
+  uri: "https://apollo-server-instagram.herokuapp.com/",
 });
 
 const authLink = setContext((_, { headers }) => {
