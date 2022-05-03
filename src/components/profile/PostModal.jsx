@@ -29,13 +29,18 @@ const PostModal = ({ open, setOpen, post, user }) => {
     variables: { postId: post.id },
   });
 
-  const allData = { ...user, ...post, ...data?.post };
+  // adding postedBy property to match data query on Feed
+  const allData = { postedBy: user, ...post, ...data?.post };
 
   return (
     <>
       {data?.post && (
-        <Modal className="rounded-lg max-w-2xl" open={open} setOpen={setOpen}>
-          <Post data={allData} setOpen={setOpen} />
+        <Modal open={open} setOpen={setOpen}>
+          <Post
+            className="rounded-lg max-w-2xl"
+            data={allData}
+            setOpen={setOpen}
+          />
         </Modal>
       )}
     </>

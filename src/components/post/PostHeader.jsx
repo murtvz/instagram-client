@@ -1,17 +1,42 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { DotsHorizontalIcon } from "@heroicons/react/solid";
+import { gql, useMutation } from "@apollo/client";
 
 import Avatar from "../UI/Avatar";
 
-const PostHeader = ({ avatar, username, setOpen, alreadyFollowing }) => {
+const FOLLOW_USER = gql`
+  mutation FollowUser($id: ID!) {
+    follow(id: $id) {
+      id
+      alreadyFollowing
+      followerCount
+    }
+  }
+`;
+
+const PostHeader = ({
+  avatar,
+  username,
+  setOpen,
+  alreadyFollowing,
+  followsMe,
+  id,
+}) => {
   const token = localStorage.getItem("token");
   const me = localStorage.getItem("me");
   const navigate = useNavigate();
 
+  const [follow] = useMutation(FOLLOW_USER, {
+    variables: {
+      id,
+    },
+  });
+
   // Handle (un)following user
   const handleFollow = async () => {
     if (!token) return navigate("/login");
+    follow();
   };
 
   return (
@@ -25,12 +50,14 @@ const PostHeader = ({ avatar, username, setOpen, alreadyFollowing }) => {
         >
           {username}
         </Link>
-        {me !== username && (
+        {me !== username && (alreadyFollowing || followsMe) && (
           <button
             onClick={handleFollow}
             className="text-sm font-medium text-blue-500 focus:outline-none"
           >
-            {alreadyFollowing ? "Unfollow" : "Follow"}
+            {alreadyFollowing && "Unfollow"}
+            {!alreadyFollowing && !followsMe && "Follow"}
+            {!alreadyFollowing && followsMe && "Follows you"}
           </button>
         )}
       </div>

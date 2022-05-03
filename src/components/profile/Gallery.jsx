@@ -19,6 +19,7 @@ const Gallery = ({ user }) => {
             username: user.username,
             alreadyFollowing: user.alreadyFollowing,
             followsMe: user.followsMe,
+            id: user.id,
           }}
         />
       )}

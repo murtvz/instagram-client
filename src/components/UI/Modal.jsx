@@ -11,9 +11,7 @@ const Modal = ({ children, className, open, setOpen }) => {
       >
         <div className="flex items-center justify-center min-h-screen mx-auto py-8 px-16 text-center">
           <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-70" />
-          <div className={`relative bg-white text-left ${className}`}>
-            {children}
-          </div>
+          <div className="relative text-left">{children}</div>
         </div>
       </Dialog>
     </Transition.Root>

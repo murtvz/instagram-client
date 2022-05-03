@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { gql, useMutation } from "@apollo/client";
 
 import { GET_POST } from "../profile/PostModal";
+import { GET_FEED } from "../../pages/Feed";
 
 const ADD_COMMENT = gql`
   mutation Comment($body: String!, $postId: ID!) {
@@ -26,8 +27,9 @@ const AddComment = ({ id }) => {
   const commentRef = useRef();
 
   const [addComment] = useMutation(ADD_COMMENT, {
+    refetchQueries: [GET_FEED], // TEMPORARY remove when you figure out how to update the cache
     update: (cache, { data: { comment } }) => {
-      // Get current post from cache
+      // Get current user post from cache
       const data = cache.readQuery({
         query: GET_POST,
         variables: {
@@ -36,18 +38,20 @@ const AddComment = ({ id }) => {
       });
 
       // Add new comment to comments array
-      cache.writeQuery({
-        query: GET_POST,
-        variables: {
-          postId: id,
-        },
-        data: {
-          post: {
-            ...data.post,
-            comments: [comment, ...data.post.comments],
+      if (data) {
+        cache.writeQuery({
+          query: GET_POST,
+          variables: {
+            postId: id,
           },
-        },
-      });
+          data: {
+            post: {
+              ...data.post,
+              comments: [comment, ...data.post.comments],
+            },
+          },
+        });
+      }
     },
   });
 

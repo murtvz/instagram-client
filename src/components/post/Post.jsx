@@ -17,7 +17,7 @@ const LIKE_POST = gql`
   }
 `;
 
-const Post = ({ data, setOpen }) => {
+const Post = ({ data, setOpen, className }) => {
   const token = localStorage.getItem("token");
 
   const [likePost] = useMutation(LIKE_POST, {
@@ -27,18 +27,20 @@ const Post = ({ data, setOpen }) => {
   });
 
   return (
-    <>
+    <article className={`bg-white ${className}`}>
       <PostHeader
-        avatar={data.avatar}
-        username={data.username}
+        avatar={data.postedBy.avatar}
+        username={data.postedBy.username}
         setOpen={setOpen}
-        alreadyFollowing={data.alreadyFollowing}
+        alreadyFollowing={data.postedBy.alreadyFollowing}
+        followsMe={data.postedBy.followsMe}
+        id={data.postedBy.id}
       />
 
       {/* Image */}
       <img
         src={data.url}
-        alt={`${data.username}'s post`}
+        alt={`${data.postedBy.username}'s post`}
         className="aspect-square object-cover"
         onDoubleClick={likePost}
       />
@@ -52,7 +54,7 @@ const Post = ({ data, setOpen }) => {
           {data.likeCount} {data.likeCount === 1 ? "like" : "likes"}
         </div>
         <Caption
-          username={data.username}
+          username={data.postedBy.username}
           setOpen={setOpen}
           body={data.caption}
         />
@@ -64,7 +66,7 @@ const Post = ({ data, setOpen }) => {
           </>
         )}
       </div>
-    </>
+    </article>
   );
 };
 
